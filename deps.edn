@@ -1,0 +1,16 @@
+{:paths ["src"]
+ :deps
+ {org.clojure/clojure {:mvn/version "1.11.1"}
+  org.clojure/data.zip {:mvn/version "1.0.0"}}
+
+ :aliases
+ {:dev
+  {:extra-paths ["test"]
+   :extra-deps {lambdaisland/kaocha {:mvn/version "1.65.1029"}}}
+
+  :test
+  {:main-opts ["-m" "kaocha.runner"]}
+
+  :outdated
+  {:extra-deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
+   :main-opts ["-m" "antq.core"]}}}
