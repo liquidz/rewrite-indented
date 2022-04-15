@@ -24,7 +24,7 @@
 (defn- debug
   "TODO FIXME DELETE ME"
   [& args]
-  (if @debug-enabled?
+  (when @debug-enabled?
     (apply println args)))
 (comment (reset! debug-enabled? false))
 
