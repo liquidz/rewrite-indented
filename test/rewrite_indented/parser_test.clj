@@ -12,7 +12,7 @@
 (t/deftest parse-test
   (let [res (parse "a")]
     (t/is (= [["a"]] res))
-    (t/is (= {:level 0} (meta (first res)))))
+    (t/is (= {:level 0 :prefix ""} (meta (first res)))))
 
   (t/is (= [["a"] ["b"]]
            (parse "a\nb")))
