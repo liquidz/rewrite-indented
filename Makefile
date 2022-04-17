@@ -7,6 +7,10 @@ lint:
 	cljstyle check
 	clj-kondo --lint src:test
 
+.PHONY: install
+install:
+	clojure -T:build install
+
 .PHONY: outdated
 outdated:
 	clojure -M:outdated
