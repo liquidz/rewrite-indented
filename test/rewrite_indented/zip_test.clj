@@ -5,19 +5,13 @@
    [rewrite-indented.zip :as sut]))
 
 (t/deftest zipper-test
-  (let [text "first\n a\n  b\nsecond\n a\n b"]
+  (let [text "a\n b\n  c\nd\n\te\n\t\tf"]
     (t/is (= text
-             (-> (sut/string->zipper text)
-                 (sut/zipper->string))))
-
-    (t/is (= "first\n a!\n  b\nsecond\n a\n b"
-             (-> (sut/string->zipper text)
-                 (sut/find-next-string #(= "a" %))
-                 (sut/update #(str % "!"))
-                 (sut/zipper->string))))))
+             (-> (sut/of-string text)
+                 (sut/root-string))))))
 
 (t/deftest find-next-string-test
-  (let [zloc (sut/string->zipper "a\n x\nb\n x\nc\n x")
+  (let [zloc (sut/of-string "a\n x\nb\n x\nc\n x")
         first-x-zloc (-> zloc
                          (sut/find-next-string #(= "x" %)))
         second-x-zloc (-> first-x-zloc
@@ -34,7 +28,7 @@
     (t/is (nil? (sut/find-next-string zloc #(= "unknown" %))))))
 
 (t/deftest find-ancestor-string-test
-  (let [zloc (sut/string->zipper "a\n x\nb\n x\nc\n x")
+  (let [zloc (sut/of-string "a\n x\nb\n x\nc\n x")
         first-x-zloc (-> zloc
                          (sut/find-next-string #(= "x" %)))
         second-x-zloc (-> first-x-zloc
@@ -50,10 +44,26 @@
     (t/is (some? (sut/find-ancestor-string second-x-zloc #(= "b" %))))))
 
 (t/deftest update-test
-  (let [text "first\n a\n  b\nsecond\n a\n b"
-        zloc (sut/string->zipper text)]
-    (t/is (= "first\n a!\n  b\nsecond\n a\n b"
-             (-> zloc
-                 (sut/find-next-string #(= "a" %))
-                 (sut/update #(str % "!"))
-                 (sut/zipper->string))))))
+  (t/testing "spaces"
+    (let [text "first\n a\n  b\nsecond\n a\n b"
+          zloc (sut/of-string text)]
+      (t/is (= "first\n a!\n  b\nsecond\n a\n b"
+               (-> zloc
+                   (sut/find-next-string #(= "a" %))
+                   (sut/update #(str % "!"))
+                   (sut/root-string))))))
+
+  (t/testing "tabs"
+    (let [text "a\n b\n \tc"
+          zloc (sut/of-string text)]
+      (t/is (= "a\n b!\n \tc"
+               (-> zloc
+                   (sut/find-next-string #(= "b" %))
+                   (sut/update #(str % "!"))
+                   (sut/root-string))))
+
+      (t/is (= "a\n b\n \tc!"
+               (-> zloc
+                   (sut/find-next-string #(= "c" %))
+                   (sut/update #(str % "!"))
+                   (sut/root-string)))))))

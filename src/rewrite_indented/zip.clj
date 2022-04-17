@@ -41,7 +41,7 @@
                                (string? (first %))
                                (p? (first %)))))
 
-(defn string->zipper
+(defn of-string
   [s]
   (->> (str/split-lines s)
        (parser/parse)
@@ -49,7 +49,11 @@
                    (fn [existing-node new-node]
                      (with-meta new-node (meta existing-node))))))
 
-(defn zipper->string
+(defn of-file
+  [f]
+  (of-string (slurp f)))
+
+(defn root-string
   [zloc]
   (-> (move-to-root zloc)
       (zip/node)
