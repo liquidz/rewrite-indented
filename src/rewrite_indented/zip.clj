@@ -1,4 +1,4 @@
-(ns rewrite-indented.core
+(ns rewrite-indented.zip
   (:refer-clojure :exclude [update])
   (:require
    [clojure.string :as str]

@@ -1,8 +1,8 @@
-(ns rewrite-indented.core-test
+(ns rewrite-indented.zip-test
   (:require
    [clojure.test :as t]
    [clojure.zip :as zip]
-   [rewrite-indented.core :as sut]))
+   [rewrite-indented.zip :as sut]))
 
 (t/deftest zipper-test
   (let [text "first\n a\n  b\nsecond\n a\n b"]
