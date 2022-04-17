@@ -1,6 +1,6 @@
 = rewrite-indented
 
-Library to read and write space-indented texts.
+Library to read and write indented texts.
 
 
 TODO
