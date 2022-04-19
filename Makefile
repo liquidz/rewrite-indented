@@ -11,6 +11,10 @@ lint:
 install:
 	clojure -T:build install
 
+.PHONY: deploy
+deploy:
+	clojure -T:build deploy
+
 .PHONY: outdated
 outdated:
 	clojure -M:outdated
