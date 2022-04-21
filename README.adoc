@@ -3,7 +3,36 @@
 Library to read and write indented texts.
 
 
-TODO
+image:https://github.com/liquidz/rewrite-indented/actions/workflows/test.yml/badge.svg["GitHub Actions for test workflow", link="https://github.com/liquidz/rewrite-indented/actions/workflows/test.yml"]
+image:https://github.com/liquidz/rewrite-indented/actions/workflows/lint.yml/badge.svg["GitHub Actions for lint workflow", link="https://github.com/liquidz/rewrite-indented/actions/workflows/lint.yml"]
+
+image:https://img.shields.io/clojars/v/com.github.liquidz/rewrite-indented.svg["Clojars Project", link="https://clojars.org/com.github.liquidz/rewrite-indented"]
+
+== Usage
+
+[source,clojure]
+----
+(require '[rewrite-indented.zip :as z])
+;; => nil
+
+(-> (z/of-string "foo\n  TARGET\n    bar")
+    (z/find-next-string #(= "TARGET" %))
+    (z/update (constantly "hello"))
+    (z/root-string))
+;; => "foo\n  hello\n    bar"
+
+(loop [zloc (z/of-string "first\n  TARGET\n    foo\nsecond\n  TARGET\n    bar")]
+  (if-let [zloc (z/find-next-string zloc #(= "TARGET" %))]
+    (recur
+     (cond-> zloc
+       (z/find-ancestor-string zloc #(= "second" %))
+       (z/update (constantly "hello"))
+
+       :always
+       (z/next)))
+    (z/root-string zloc)))
+;; => "first\n  TARGET\n    foo\nsecond\n  hello\n    bar"
+----
 
 == License
 
