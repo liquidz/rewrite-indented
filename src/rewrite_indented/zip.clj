@@ -1,9 +1,13 @@
 (ns rewrite-indented.zip
-  (:refer-clojure :exclude [update])
+  (:refer-clojure :exclude [next update])
   (:require
    [clojure.string :as str]
    [clojure.zip :as zip]
    [rewrite-indented.parser :as parser]))
+
+(def next
+  "Alias for zip/next"
+  zip/next)
 
 (defn update
   [zloc f]
