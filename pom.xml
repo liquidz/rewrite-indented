@@ -4,7 +4,7 @@
   <packaging>jar</packaging>
   <groupId>com.github.liquidz</groupId>
   <artifactId>rewrite-indented</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <name>rewrite-indented</name>
   <description>Library to read and write space-indented texts</description>
   <url>https://github.com/liquidz/rewrite-indented</url>
