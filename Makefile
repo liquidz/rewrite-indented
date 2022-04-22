@@ -8,11 +8,11 @@ lint:
 	clj-kondo --lint src:test
 
 .PHONY: install
-install:
+install: clean
 	clojure -T:build install
 
 .PHONY: deploy
-deploy:
+deploy: clean
 	clojure -T:build deploy
 
 .PHONY: outdated
