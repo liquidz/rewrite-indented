@@ -47,8 +47,7 @@
 
 (defn of-string
   [s]
-  (->> (str/split-lines s)
-       (parser/parse)
+  (->> (parser/parse s)
        (zip/zipper vector? seq
                    (fn [existing-node new-node]
                      (with-meta new-node (meta existing-node))))))
