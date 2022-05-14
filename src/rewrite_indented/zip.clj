@@ -1,7 +1,6 @@
 (ns rewrite-indented.zip
   (:refer-clojure :exclude [next update])
   (:require
-   [clojure.string :as str]
    [clojure.zip :as zip]
    [rewrite-indented.parser :as parser]))
 
