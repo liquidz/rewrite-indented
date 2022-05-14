@@ -13,11 +13,6 @@
    :url "https://github.com/liquidz/rewrite-indented"
    :tag version})
 
-(defn print-version
-  "cf. https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#example-setting-a-value"
-  [_]
-  (println (str "::set-output name=version::" version)))
-
 (defn pom
   [_]
   (let [basis (b/create-basis)]
@@ -51,4 +46,5 @@
   (jar arg)
   (deploy/deploy {:artifact jar-file
                   :installer :remote
-                  :pom-file (b/pom-path {:lib lib :class-dir class-dir})}))
+                  :pom-file (b/pom-path {:lib lib :class-dir class-dir})})
+  (println (str "::set-output name=version::" version)))
