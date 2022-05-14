@@ -5,10 +5,15 @@
    [rewrite-indented.zip :as sut]))
 
 (t/deftest zipper-test
-  (let [text "a\n b\n  c\nd\n\te\n\t\tf"]
-    (t/is (= text
-             (-> (sut/of-string text)
-                 (sut/root-string))))))
+  (let [texts [""
+               "\n"
+               "\na\t"
+               "a\n b\n  c\nd\n\te\n\t\tf"]]
+    (doseq [text texts]
+      (t/testing text
+        (t/is (= text
+                 (-> (sut/of-string text)
+                     (sut/root-string))))))))
 
 (t/deftest find-next-string-test
   (let [zloc (sut/of-string "a\n x\nb\n x\nc\n x")
