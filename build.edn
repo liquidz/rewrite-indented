@@ -1,5 +1,5 @@
 {:lib com.github.liquidz/rewrite-indented
- :version "0.1.{{commit-count}}"
+ :version "0.1.{{git/commit-count}}"
  :scm {:connection "scm:git:git://github.com/liquidz/rewrite-indented.git"
        :developerConnection "scm:git:ssh://git@github.com/liquidz/rewrite-indented.git"
        :url "https://github.com/liquidz/rewrite-indented"}
