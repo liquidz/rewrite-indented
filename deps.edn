@@ -13,7 +13,7 @@
   {:main-opts ["-m" "kaocha.runner"]}
 
   :build
-  {:deps {com.github.liquidz/build.edn {:git/tag "0.9.216" :git/sha "2f7d56e"}}
+  {:deps {com.github.liquidz/build.edn {:mvn/version "0.9.216"}}
    :ns-default build-edn.main}
 
   :outdated
