@@ -6,14 +6,14 @@
  :aliases
  {:dev
   {:extra-paths ["test"]
-   :extra-deps {lambdaisland/kaocha {:mvn/version "1.65.1029"}
-                com.github.liquidz/testdoc {:mvn/version "1.5.0"}}}
+   :extra-deps {lambdaisland/kaocha {:mvn/version "1.85.1342"}
+                com.github.liquidz/testdoc {:mvn/version "1.5.109"}}}
 
   :test
   {:main-opts ["-m" "kaocha.runner"]}
 
   :build
-  {:deps {com.github.liquidz/build.edn {:git/tag "0.2.63" :git/sha "f4e571d"}}
+  {:deps {com.github.liquidz/build.edn {:git/tag "0.9.216" :git/sha "2f7d56e"}}
    :ns-default build-edn.main}
 
   :outdated
