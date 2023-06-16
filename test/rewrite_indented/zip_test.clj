@@ -33,6 +33,12 @@
     (t/is (nil? (sut/find-next-string zloc #(= "unknown" %))))))
 
 (t/deftest find-ancestor-string-test
+  ;; a
+  ;;  x
+  ;; b
+  ;;  x
+  ;; c
+  ;;  x
   (let [zloc (sut/of-string "a\n x\nb\n x\nc\n x")
         first-x-zloc (-> zloc
                          (sut/find-next-string #(= "x" %)))
@@ -47,6 +53,19 @@
     (t/is (nil? (sut/find-ancestor-string zloc #(= "b" %))))
     (t/is (nil? (sut/find-ancestor-string first-x-zloc #(= "b" %))))
     (t/is (some? (sut/find-ancestor-string second-x-zloc #(= "b" %))))))
+
+(t/deftest find-previous-string-test
+  ;; a
+  ;;  b
+  ;;  c
+  ;;   d
+  (let [zloc (sut/of-string "a\n b\n c\n  d")
+        d-zloc (-> zloc
+                   (sut/find-next-string #(= "d" %)))]
+    (t/is (nil? (sut/find-previous-string zloc #(= "a" %))))
+    (t/is (some? (sut/find-previous-string d-zloc #(= "a" %))))
+    (t/is (some? (sut/find-previous-string d-zloc #(= "b" %))))
+    (t/is (some? (sut/find-previous-string d-zloc #(= "c" %))))))
 
 (t/deftest update-test
   (t/testing "spaces"

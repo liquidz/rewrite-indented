@@ -44,6 +44,12 @@
                                (string? (first %))
                                (p? (first %)))))
 
+(defn find-previous-string
+  [zloc p?]
+  (find-next zloc zip/prev #(and (string? (first %))
+                                 (vector? %)
+                                 (p? (first %)))))
+
 (defn of-string
   [s]
   (->> (parser/parse s)
