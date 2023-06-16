@@ -13,7 +13,7 @@ install: clean
 
 .PHONY: outdated
 outdated:
-	clojure -M:outdated
+	clojure -M:outdated --upgrade
 
 .PHONY: clean
 clean:
