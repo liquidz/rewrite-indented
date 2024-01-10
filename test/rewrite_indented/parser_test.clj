@@ -26,7 +26,10 @@
             ["d" [["e"]
                   ["f" [["g"]]]]]
             ["h"]]
-           (sut/parse "a\n b\n  c\nd\n e\n f\n  g\nh"))))
+           (sut/parse "a\n b\n  c\nd\n e\n f\n  g\nh")))
+
+  (t/is (= [["a" [["b"] [""] [""] ["c"]]]]
+           (sut/parse "a\n b\n\n\n c"))))
 
 (defn- parse-with-meta
   [s]
