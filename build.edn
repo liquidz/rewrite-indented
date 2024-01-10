@@ -3,4 +3,6 @@
  :scm {:connection "scm:git:git://github.com/liquidz/rewrite-indented.git"
        :developerConnection "scm:git:ssh://git@github.com/liquidz/rewrite-indented.git"
        :url "https://github.com/liquidz/rewrite-indented"}
+ :licenses [{:name "Eclipse Public License - v 2.0"}
+            :url "https://www.eclipse.org/legal/epl-2.0/"]
  :github-actions? true}
