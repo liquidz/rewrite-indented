@@ -5,11 +5,11 @@ jobs:
   tag-and-release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v4
         with:
           distribution: 'adopt'
           java-version: '11'
@@ -32,12 +32,8 @@ jobs:
           CLOJARS_PASSWORD: ${{secrets.CLOJARS_PASSWORD}}
           CLOJARS_USERNAME: ${{secrets.CLOJARS_USERNAME}}
 
-      - uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ steps.deploy.outputs.version }}
-          release_name: ${{ steps.deploy.outputs.version }}
-          body: released
-          draft: false
-          prerelease: false
+          tag: ${{ steps.deploy.outputs.version }}
+          skipIfReleaseExists: true
+          generateReleaseNotes: true

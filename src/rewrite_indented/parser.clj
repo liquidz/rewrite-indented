@@ -13,12 +13,17 @@
 
 (defn- normalize-blank-line-level
   [lines]
-  (->> (partition 2 1 (concat [(first lines)] lines))
-       (map (fn [[prev-line line]]
-              (let [{:keys [level]} (get-indent-level prev-line)]
-                (if (str/blank? line)
-                  (apply str (repeat level " "))
-                  line))))))
+  (loop [[[prev-line line] & rest-lines] (partition 2 1 (concat [(first lines)] lines))
+         result []]
+    (if-not prev-line
+      result
+      (let [{:keys [level]} (get-indent-level (if (seq result)
+                                                (last result)
+                                                prev-line))
+            new-line (if (str/blank? line)
+                       (apply str (repeat level " "))
+                       line)]
+        (recur rest-lines (conj result new-line))))))
 
 (defn- parse*
   [base-level lines]

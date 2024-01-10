@@ -8,7 +8,8 @@
   (let [texts [""
                "\n"
                "\na\t"
-               "a\n b\n  c\nd\n\te\n\t\tf"]]
+               "a\n b\n  c\nd\n\te\n\t\tf"
+               "a\n b\n\n\n c"]]
     (doseq [text texts]
       (t/testing text
         (t/is (= text
